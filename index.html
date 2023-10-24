@@ -58,24 +58,24 @@
       <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for pangenome...">
     <table id="myTable">
       <tr>
-        <th>Pangenome</th>
-        <th>Unique ID</th>
-        <th>NCBI_txid</th>
-        <th>effective</th>
-        <th>level</th>
-        <th>pan</th>
-        <th>core</th>
-        <th>peripheral</th>
-        <th>unique</th>
-        <th>core_pan</th>
-        <th>shell_eff</th>
-        <th>reference</th>
-        <th>DOI</th>
-        <th>Gene_Cluster</th>
-        <th>DS1</th>
-        <th>DS2</th>
-        <th>DS3</th>
-        <th>DS4</th>
+        <th><a href="#" onclick="sortTable(0)">Pangenome</a></th>
+        <th><a href="#" onclick="sortTable(1)">Unique ID</a></th>
+        <th><a href="#" onclick="sortTable(2)">NCBI_txid</a></th>
+        <th><a href="#" onclick="sortTable(3)">effective</a></th>
+        <th><a href="#" onclick="sortTable(4)">level</a></th>
+        <th><a href="#" onclick="sortTable(5)">pan</a></th>
+        <th><a href="#" onclick="sortTable(6)">core</a></th>
+        <th><a href="#" onclick="sortTable(7)">peripheral</a></th>
+        <th><a href="#" onclick="sortTable(8)">unique</a></th>
+        <th><a href="#" onclick="sortTable(9)">core_pan</a></th>
+        <th><a href="#" onclick="sortTable(10)">shell_eff</a></th>
+        <th><a href="#" onclick="sortTable(11)">reference</a></th>
+        <th><a href="#" onclick="sortTable(12)">DOI</a></th>
+        <th><a href="#" onclick="sortTable(13)">Gene_Cluster</a></th>
+        <th><a href="#" onclick="sortTable(14)">DS1</a></th>
+        <th><a href="#" onclick="sortTable(15)">DS2</a></th>
+        <th><a href="#" onclick="sortTable(16)">DS3</a></th>
+        <th><a href="#" onclick="sortTable(17)">DS4</a></th>
       </tr>
         <tr>
             <td>Streptococcus pneumoniae</td>
@@ -3798,6 +3798,32 @@
             }
         }
     }
+    function sortTable(columnIndex) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.querySelector("table");
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[columnIndex];
+      y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
 </script>
   </body>
 </html>
